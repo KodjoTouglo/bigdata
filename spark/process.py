@@ -6,7 +6,7 @@ from pyspark.sql.functions import col, trim, regexp_replace, to_timestamp
 conf = SparkConf() \
     .setAppName("Yelp Reviews Cleaner") \
     .set("spark.driver.memory", "4g") \
-    .set("spark.executor.memory", "4g")
+    .set("spark.executor.memory", "4g") #Utilsation de 4g pour l'exécution en mémoire
 
 # Création de la session Spark
 spark = SparkSession.builder \
@@ -16,7 +16,7 @@ spark = SparkSession.builder \
 spark.sparkContext.setLogLevel("WARN")
 
 # Lecture JSON brut
-df = spark.read.json("hdfs://namenode:9000/data/raw/yelp/review.json")
+df = spark.read.json("hdfs://namenode:9000/data/raw/yelp_reviews/review.json").limit(20000)
 
 # Nettoyage et typage
 df_clean = df.select(

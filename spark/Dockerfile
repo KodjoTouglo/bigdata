@@ -6,6 +6,6 @@ RUN apt-get update && \
     ln -s /usr/bin/pip3 /usr/bin/pip && \
     apt-get clean \
 
-COPY process.py /opt/spark-apps/
+RUN pip install pyspark
 
-RUN pip install --no-cache-dir numpy pandas pyspark
+COPY process.py /opt/spark-apps/
